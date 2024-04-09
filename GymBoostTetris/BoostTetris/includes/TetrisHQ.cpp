@@ -450,13 +450,13 @@ inline void eraseBlock(State* state, int x, int y, Block::Type type, uint8_t rot
 }
 inline int testCollision(State* state, int x, int y, Block::Type type, uint8_t rot) {
 	auto& b = blocks[type];
-	int collisionTimes = 0;
+	int overlap_count = 0;
 	for (int i = 0; i < b.height; i++)
 		for (int j = 0; j < b.width; j++) {
 			const int cx = BOARD_LEFT + x + j, cy = BOARD_TOP + y + i;
-			collisionTimes += !!(state->board[cy][cx] && b.data[rot][i][j]);
+			overlap_count += !!(state->board[cy][cx] && b.data[rot][i][j]);
 		}
-	return collisionTimes;
+	return overlap_count;
 }
 
 void reset(State* state) {
